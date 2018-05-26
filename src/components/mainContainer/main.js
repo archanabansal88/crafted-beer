@@ -67,7 +67,9 @@ class Main extends Component {
     return (
       <div>
         <Header cartValue={cart.length} />
-        {isDataLoaded &&
+        <div style={{'paddingTop': '75px'}}>
+
+          {isDataLoaded &&
           <div className='level'><div className='level-item'>
             <span className='is-size-1 card-content'>
               <i className='fas fa-spinner fa-pulse' />
@@ -75,7 +77,7 @@ class Main extends Component {
             <span className='is-size-3'>Loading</span>
           </div>
           </div>}
-        {filteredData &&
+          {filteredData &&
           <div>
             <section className='level'>
               <div className='card-content level-item'>
@@ -89,7 +91,8 @@ class Main extends Component {
               </div>
             </div>
           </div>
-        }
+          }
+        </div>
       </div>
     )
   }

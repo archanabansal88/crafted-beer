@@ -2,7 +2,7 @@ import React from 'react'
 
 const List = ({data, onAddCartClick}) => {
   return (
-    <div className='panel-block'>
+    <div>
       <ul className='columns is-multiline'>
         {data.map((value, index) => {
           const {name, style, abv, ounces} = value
