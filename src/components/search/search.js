@@ -1,18 +1,34 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-const Search = () => {
-  return (
-    <div className='field has-addons'>
-      <div className='control'>
-        <input className='input' type='text' placeholder='search beer' />
-      </div>
-      <div className='control'>
-        <a className='button is-info'>
+class Search extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      searchTerm: ''
+    }
+    this.handleSearchText = this.handleSearchText.bind(this)
+  }
+
+  handleSearchText (event) {
+    this.setState({searchTerm: event.target.value})
+  }
+
+  render () {
+    const {searchTerm} = this.state
+    const {onSearchClick} = this.props
+    return (
+      <div className='field has-addons'>
+        <div className='control'>
+          <input className='input' type='text' placeholder='search beer' onChange={this.handleSearchText} value={searchTerm} />
+        </div>
+        <div className='control'>
+          <a className='button is-info' onClick={onSearchClick.bind(null, searchTerm)}>
       Search
-        </a>
+          </a>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Search

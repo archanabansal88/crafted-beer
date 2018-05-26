@@ -9,16 +9,24 @@ class Main extends Component {
     super(props)
     this.state = {
       data: false,
-      itemsToRender: 21
+      itemsToRender: 21,
+      searchedItem: '',
+      filteredData: false
     }
     this.onScroll = this.onScroll.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   componentDidMount () {
     fetch('http://starlord.hackerearth.com/beercraft')
       .then((response) => response.json())
-      .then((data) => this.setState({data}))
+      .then((data) => this.setState({data, filteredData: data}))
     window.addEventListener('scroll', throttle(this.onScroll, 250), false)
+  }
+
+  handleSearch (text) {
+    const filteredData = this.state.data.filter((data) => data.name.toLowerCase().indexOf(text.toLowerCase()) !== -1)
+    this.setState({filteredData})
   }
 
   onScroll () {
@@ -28,18 +36,18 @@ class Main extends Component {
   }
 
   render () {
-    const {data, itemsToRender} = this.state
-    const items = data && data.slice(0, itemsToRender)
+    const {filteredData, itemsToRender} = this.state
+    const items = filteredData && filteredData.slice(0, itemsToRender)
 
     return (
       <div>
         <Header />
         <section className='level'>
           <div className='card-content level-item'>
-            <Search />
+            <Search onSearchClick={this.handleSearch} />
           </div>
         </section>
-        {data && <List data={items} />}
+        {filteredData && <List data={items} />}
       </div>
     )
   }
