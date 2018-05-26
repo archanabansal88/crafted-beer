@@ -13,15 +13,21 @@ class Main extends Component {
       itemsToRender: 21,
       filteredData: false,
       isDataLoaded: true,
-      sortBy: false
+      sortBy: false,
+      cart: []
     }
     this.onScroll = this.onScroll.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSortClick = this.handleSortClick.bind(this)
+    this.handleAddCartClick = this.handleAddCartClick.bind(this)
   }
 
   componentDidMount () {
-    fetch('http://starlord.hackerearth.com/beercraft')
+    const cartValue = window.localStorage.getItem('cart')
+    const cart = cartValue ? JSON.parse(cartValue) : []
+    this.setState({cart})
+
+    window.fetch('http://starlord.hackerearth.com/beercraft')
       .then((response) => response.json())
       .then((data) => this.setState({data, filteredData: data, isDataLoaded: false}))
     window.addEventListener('scroll', throttle(this.onScroll, 250), false)
@@ -47,13 +53,20 @@ class Main extends Component {
     this.setState({filteredData: sortedData, sortBy: type})
   }
 
+  handleAddCartClick (value) {
+    const {cart} = this.state
+    cart.push(value)
+    this.setState({cart})
+    window.localStorage.setItem('cart', JSON.stringify(cart))
+  }
+
   render () {
-    const {filteredData, itemsToRender, isDataLoaded, data, sortBy} = this.state
+    const {filteredData, itemsToRender, isDataLoaded, data, sortBy, cart} = this.state
     const items = filteredData && filteredData.slice(0, itemsToRender)
 
     return (
       <div>
-        <Header />
+        <Header cartValue={cart.length} />
         {isDataLoaded &&
           <div className='level'><div className='level-item'>
             <span className='is-size-1 card-content'>
@@ -72,7 +85,7 @@ class Main extends Component {
             <div className='container'>
               <div className='panel'>
                 <Sort onSortClick={this.handleSortClick} sortBy={sortBy} />
-                <List data={items} />
+                <List data={items} onAddCartClick={this.handleAddCartClick} />
               </div>
             </div>
           </div>
