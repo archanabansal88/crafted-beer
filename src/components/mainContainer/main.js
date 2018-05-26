@@ -10,8 +10,8 @@ class Main extends Component {
     this.state = {
       data: false,
       itemsToRender: 21,
-      searchedItem: '',
-      filteredData: false
+      filteredData: false,
+      isDataLoaded: true
     }
     this.onScroll = this.onScroll.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
@@ -20,7 +20,7 @@ class Main extends Component {
   componentDidMount () {
     fetch('http://starlord.hackerearth.com/beercraft')
       .then((response) => response.json())
-      .then((data) => this.setState({data, filteredData: data}))
+      .then((data) => this.setState({data, filteredData: data, isDataLoaded: false}))
     window.addEventListener('scroll', throttle(this.onScroll, 250), false)
   }
 
@@ -36,7 +36,7 @@ class Main extends Component {
   }
 
   render () {
-    const {filteredData, itemsToRender} = this.state
+    const {filteredData, itemsToRender, isDataLoaded} = this.state
     const items = filteredData && filteredData.slice(0, itemsToRender)
 
     return (
@@ -47,6 +47,13 @@ class Main extends Component {
             <Search onSearchClick={this.handleSearch} />
           </div>
         </section>
+        {isDataLoaded && <div className='level'><div className='level-item'>
+          <span className='is-size-1 card-content'>
+            <i className='fas fa-spinner fa-pulse' />
+          </span>
+          <span className='is-size-3'>Loading</span>
+        </div>
+        </div>}
         {filteredData && <List data={items} />}
       </div>
     )

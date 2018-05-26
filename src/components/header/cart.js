@@ -3,8 +3,10 @@ import React from 'react'
 const Cart = () => {
   return (
     <div className='level-right'>
-      <i className='fa fa-shopping-cart' />
-      <div>Cart</div>
+      <span className='icon is-large'>
+        <i className='fa fa-shopping-cart' />
+      </span>
+      <span className='is-size-5'>Cart</span>
     </div>
   )
 }
