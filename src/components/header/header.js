@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <section className='hero is-primary is-bold card'>
       <div className='hero-head'>
-        <div className='card-content level'>
+        <div className='card-content level is-mobile'>
           <h1 className='title is-marginless'>
         Crafted Beer
           </h1>
