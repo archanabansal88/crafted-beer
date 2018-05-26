@@ -4,7 +4,8 @@
   "description": "Pseudo Front End Application which would let the users help browse and order crafted beer",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack && webpack-dev-server"
   },
   "author": "Archana Bansal",
   "license": "ISC",
@@ -22,6 +23,7 @@
   },
   "dependencies": {
     "bulma": "^0.7.1",
+    "font-awesome": "^4.7.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   }
