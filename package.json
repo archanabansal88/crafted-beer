@@ -2,7 +2,7 @@
   "name": "crafts-beer",
   "version": "1.0.0",
   "description": "Pseudo Front End Application which would let the users help browse and order crafted beer",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,7 @@
     "webpack-dev-server": "3.1.3"
   },
   "dependencies": {
+    "bulma": "^0.7.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   }
