@@ -3,10 +3,10 @@ import Cart from './cart'
 
 const Header = () => {
   return (
-    <section className='hero is-primary is-bold'>
+    <section className='hero is-primary is-bold card'>
       <div className='hero-head'>
-        <div className='container level'>
-          <h1 className='title'>
+        <div className='card-content level'>
+          <h1 className='title is-marginless'>
         Crafted Beer
           </h1>
           <Cart />
