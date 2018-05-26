@@ -1,6 +1,6 @@
 import React from 'react'
 
-const List = ({data}) => {
+const List = ({data, onAddCartClick}) => {
   return (
     <div className='panel-block'>
       <ul className='columns is-multiline'>
@@ -15,7 +15,7 @@ const List = ({data}) => {
                 <div>{ounces} oz</div>
               </div>
               <footer className='card-footer'>
-                <a href='#' className='card-footer-item'>Add to Cart</a>
+                <a href='#' className='card-footer-item' onClick={onAddCartClick.bind(null, value)}>Add to Cart</a>
               </footer>
             </div>
           </li>

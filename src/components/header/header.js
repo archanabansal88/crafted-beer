@@ -1,7 +1,7 @@
 import React from 'react'
 import Cart from './cart'
 
-const Header = () => {
+const Header = ({cartValue}) => {
   return (
     <section className='hero is-primary is-bold card'>
       <div className='hero-head'>
@@ -9,7 +9,7 @@ const Header = () => {
           <h1 className='title is-marginless'>
         Crafted Beer
           </h1>
-          <Cart />
+          <Cart cartLength={cartValue} />
         </div>
       </div>
     </section>
