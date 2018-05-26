@@ -36,25 +36,30 @@ class Main extends Component {
   }
 
   render () {
-    const {filteredData, itemsToRender, isDataLoaded} = this.state
+    const {filteredData, itemsToRender, isDataLoaded, data} = this.state
     const items = filteredData && filteredData.slice(0, itemsToRender)
 
     return (
       <div>
         <Header />
-        <section className='level'>
-          <div className='card-content level-item'>
-            <Search onSearchClick={this.handleSearch} />
+        {isDataLoaded &&
+          <div className='level'><div className='level-item'>
+            <span className='is-size-1 card-content'>
+              <i className='fas fa-spinner fa-pulse' />
+            </span>
+            <span className='is-size-3'>Loading</span>
           </div>
-        </section>
-        {isDataLoaded && <div className='level'><div className='level-item'>
-          <span className='is-size-1 card-content'>
-            <i className='fas fa-spinner fa-pulse' />
-          </span>
-          <span className='is-size-3'>Loading</span>
-        </div>
-        </div>}
-        {filteredData && <List data={items} />}
+          </div>}
+        {filteredData &&
+          <div>
+            <section className='level'>
+              <div className='card-content level-item'>
+                <Search onSearchClick={this.handleSearch} data={data} />
+              </div>
+            </section>
+            <List data={items} />
+          </div>
+        }
       </div>
     )
   }
