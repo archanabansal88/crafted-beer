@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Header from '../header'
 import Search from '../search'
 import List from '../beerList'
+import Sort from '../sort'
 import throttle from '../../utils/throttle'
 
 class Main extends Component {
@@ -11,10 +12,12 @@ class Main extends Component {
       data: false,
       itemsToRender: 21,
       filteredData: false,
-      isDataLoaded: true
+      isDataLoaded: true,
+      sortBy: false
     }
     this.onScroll = this.onScroll.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.handleSortClick = this.handleSortClick.bind(this)
   }
 
   componentDidMount () {
@@ -35,8 +38,17 @@ class Main extends Component {
     }
   }
 
+  handleSortClick (type) {
+    const {filteredData} = this.state
+    const sortedData = filteredData.sort((prev, next) => prev.abv - next.abv)
+    if (type === 'des') {
+      sortedData.reverse()
+    }
+    this.setState({filteredData: sortedData, sortBy: type})
+  }
+
   render () {
-    const {filteredData, itemsToRender, isDataLoaded, data} = this.state
+    const {filteredData, itemsToRender, isDataLoaded, data, sortBy} = this.state
     const items = filteredData && filteredData.slice(0, itemsToRender)
 
     return (
@@ -57,7 +69,12 @@ class Main extends Component {
                 <Search onSearchClick={this.handleSearch} data={data} />
               </div>
             </section>
-            <List data={items} />
+            <div className='container'>
+              <div className='panel'>
+                <Sort onSortClick={this.handleSortClick} sortBy={sortBy} />
+                <List data={items} />
+              </div>
+            </div>
           </div>
         }
       </div>
