@@ -1,2 +1,2 @@
-import List from './beerList'
+import List from './list'
 export default List
